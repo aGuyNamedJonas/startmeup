@@ -1,2 +1,2 @@
 # startmeup
-Quickly download any github repo folder to jumpstart coding
+Download any github repo (sub)folder to jumpstart coding
