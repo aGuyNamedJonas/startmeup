@@ -41,9 +41,14 @@ export function printUsage () {
   console.log('$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]')
   console.log('')
   console.log('Options:')
-  console.log('repo\t\tNeeds to be github.com/<user>/<subfolder>')
+  console.log('repo\t\tRepository to download from - has to be one of:')
+  console.log('\t\tgithub.com/<user>/<repo>')
+  console.log('\t\tgitlab.com/<user>/<repo>')
+  console.log('\t\tbitbucket.org/<user>/<repo>')
+  console.log('\t\thttps://<path to repo>.git')
+  console.log('\t\thttps://<path to bundle>/startmeup.bundle.zip')
   console.log('branch\t\t(Optional) Branch to use (default: main)')
-  console.log('repoSubfolder\t(Optional) Repository subfolder (default: Entire repo)')
+  console.log('repoSubfolder\t(Optional) Repository subfolder (default: entire repo)')
   console.log('localFolder\t(Optional) Local folder to download to (default: CWD)')
   console.log('')
   console.log(chalk.cyan('Missing support for Gitlab / Bitbucket?'))
@@ -55,7 +60,7 @@ export function printUsage () {
 /**
  * (Optional) startmeup.config.json:
  * {
- *   "npm-install": true, // Runs npm install / yarn install after package is downloaded
+ *   "run-install": true, // Runs npm install / yarn install after package is downloaded
  *   "dependencies": {},  // Node dependencies to add (in case this is a partial starter meant for existing node.js projects)
  *   "dev-dependencies": {}  // Node dev-dependencies to add (in case this is a partial starter meant for existing node.js projects)
  * }
