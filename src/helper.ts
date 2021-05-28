@@ -16,7 +16,7 @@ export function checkAndMapArgs (args: string[]): StartMeUpArgs {
     gitHttpsUrl: `https://${repo}.git`,
     gitPlatform: GIT_PLATFORM.GITHUB,
     repoSubfolder: optRepoSubfolder || '.',
-    localFolder: optLocalFolder || process.cwd(),
+    localFolder: optLocalFolder || './test',
   }
 
   if (!repo.trim().startsWith('github.com') || repo.trim().endsWith('.git')) {
@@ -27,6 +27,7 @@ export function checkAndMapArgs (args: string[]): StartMeUpArgs {
 }
 
 export function printError(error: Error) {
+  console.log('')
   console.log(chalk.red(error.toString()))
   console.log(chalk.cyan('Run $ npx startmeup for usage'))
   console.log('')
@@ -40,8 +41,8 @@ export function printUsage () {
   console.log('$ npx startmeup repo [repoSubfolder] [localFolder]')
   console.log('')
   console.log('Options:')
-  console.log('gitUrl\t\tNeeds to be github.com/<user>/<subfolder>')
-  console.log('gitSubfolder\t(Optional) Repository subfolder (default: Entire repo)')
+  console.log('repo\t\tNeeds to be github.com/<user>/<subfolder>')
+  console.log('repoSubfolder\t(Optional) Repository subfolder (default: Entire repo)')
   console.log('localFolder\t(Optional) Local folder to download to (default: CWD)')
   console.log('')
   console.log(chalk.cyan('Missing support for Gitlab / Bitbucket?'))
