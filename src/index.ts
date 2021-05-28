@@ -34,6 +34,16 @@ async function main () {
   // TODO: Make sure the .git files are not copied!
   // TODO: Make sure the copy command even works :)
   // TODO: Make sure this CLI is not such a goddamn mess! Time to clean it up! :)
+  /**
+   * Build startmeup in two ways:
+   * 1) SLOW: $npx startmeup github.com/aGuyNamedJonas/cdk-stack-starter
+   *    - Clones the >entire< repo to get you started
+   * 
+   * 2) FAST: $npx startmeup github.com/aGuyNamedJonas/cdk-stack-starter
+   *    - Github action that we provide creates a "startmeup.bundle.zip" (can be configure through glob patterns)
+   *    - startmeup checks for startmeup.bundle.zip
+   *    - Just downloads that file to temp folder & unpacks it
+   */
 }
 
 function checkEmptyArgs (argsv: string[]) {
