@@ -1,5 +1,6 @@
 # startmeup
-Download any git repo (sub)folder to jumpstart coding
+Download any git repo (sub)folder to jumpstart coding  
+Jumpstart coding by downloading any git repo (sub)folder
 
 # Features
 **✓ Download from any git repo** - Github, Bitbucket, Gitlab and custom git servers supported  
@@ -7,13 +8,47 @@ Download any git repo (sub)folder to jumpstart coding
 **✓ (Optional) No git clone needed** - If you bundle code as `startmeup.bundle.zip`  
 **✓ (Optional) Shorthand support** - Run `$ npx startmeup <starter>` for starters registered in starters.json (see below)
 
-# Usage
-`$ npx startmeup github.com/<user>/<repo>[:branch] [<repo subfolder>] [<local folder>]` 
-
 # Starters
-> Just run `$ npx startmeup <starter>` (👉🏻 [Add your own starters](#add-your-own-starters))
+> Just run `$ npx startmeup <starter>` ([Add your own starters](#add-your-own-starters))
 
 [cdk-construct-starter](https://github.com/aGuyNamedJonas/cdk-construct-starter) · [cdk-stack-starter](https://github.com/aGuyNamedJonas/cdk-stack-starter)
+
+# Usage
+## 1. The universal way
+`$ npx startmeup github.com/aGuyNamedJonas/cdk-stack-starter`  
+Works for Github, Gitlab, Bitbucket and any git repository.
+
+## 2. The fast way
+`$ npx startmeup github.com/aGuyNamedJonas/cdk-construct-starter`  
+
+Startmeup automatically checks for the presence of a `startmeup.bundle.zip` in the repo (subfolder). If a bundle is present this avoids a time consuming git-clone.
+
+[Creating a startmeup.bundle.zip](#creating-a-startmeup.bundle.zip)
+
+## 3. The convenient way
+`$ npx startmeup cdk-stack-starter`  
+
+For any `startmeup.bundle.zip` bundle registered in `starter.json`, you can simply run `$ npx startmeup <starter>`.  
+
+[Add your own starters](#add-your-own-starters)
+
+## Full usage
+Run startmeup without args to see usage (`$ npx startmeup`)  
+```
+Usage:
+$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]  
+
+Options:  
+repo          Repository to download from - has to be one of:  
+              github.com/<user>/<repo>  
+              gitlab.com/<user>/<repo>  
+              bitbucket.org/<user>/<repo>  
+              https://<path to repo>.git  
+              https://<path to bundle>/startmeup.bundle.zip  
+branch        (Optional) Branch to use (default: main)  
+repoSubfolder (Optional) Repository subfolder (default: .)  
+localFolder   (Optional) Local folder to download to (default: CWD)
+```
 
 # Creating a startmeup.bundle.zip
 > Only works on Github, Gitlab and Bitbucket (not on custom or self-hosted git servers)  
@@ -25,19 +60,19 @@ By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can sig
 2. Run `$ zip startmeup.bundle.zip ./* .* -x ".git"`  
 (Includes hidden files, excludes .git folder)
 3. Commit & Push
-4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone 👍🏻
+4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone
 
 # Add your own starters
-> Adding your bundle to `starters.json` lets people run `$ npx startmeup <your-starter-name>` to get it.
+After you created a `startmeup.bundle.zip` bundle (see above) to speedup usage of your starter, make it even more convenient to use by adding it to `starters.json`.
 
-After you created a `startmeup.bundle.zip` bundle to speedup usage of your starter, make it even more convenient to use by adding it to `starters.json` ✌🏻
+This lets everyone use your starter by simply running `$ npx startmeup <starter>`
 
 New entries to `starters.json` are auto-merged.
 
 # Why?
 I love the convenience how tools like `create-react-app` or `cdk init` allow you to quickly setup a template to start coding fast.  
 
-However I didn't find an easy way to build & reuse (+ share) my own starter-templates - that's why I created startmeup.
+I wanted the same convenience for building, reusing & sharing my own starter-temlates.
 
 # Contribute
 [How to contribute](./CONTRIBUTING.md)
