@@ -1,0 +1,6 @@
+{
+  "cdk-stack-starter": {
+    "bundleUrl": "https://raw.githubusercontent.com/aGuyNamedJonas/cdk-stack-starter/main/startmeup.bundle.zip",
+    "repo": "https://github.com/aGuyNamedJonas/cdk-stack-starter",
+  } 
+}
