@@ -1,6 +1,5 @@
 # startmeup
-Download any git repo (sub)folder to jumpstart coding  
-Jumpstart coding by downloading any git repo (sub)folder
+> Jumpstart coding by downloading any git repo (sub)folder
 
 # Features
 **✓ Download from any git repo** - Github, Bitbucket, Gitlab and custom git servers supported  
@@ -63,16 +62,16 @@ By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can sig
 4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone
 
 # Add your own starters
-After you created a `startmeup.bundle.zip` bundle (see above) to speedup usage of your starter, make it even more convenient to use by adding it to `starters.json`.
+After you created a `startmeup.bundle.zip` bundle (see above) to speed up the whole process, make it convenient by adding the bundle to `starters.json`.
 
-This lets everyone use your starter by simply running `$ npx startmeup <starter>`
+Now everyone can use your starter by simply running `$ npx startmeup <starter>`
 
 New entries to `starters.json` are auto-merged.
 
 # Why?
-I love the convenience how tools like `create-react-app` or `cdk init` allow you to quickly setup a template to start coding fast.  
+I love the convenience of how tools like `create-react-app` or `cdk init` speed up development by downloading starter-templates for you.  
 
-I wanted the same convenience for building, reusing & sharing my own starter-temlates.
+I wanted the same convenience for building, reusing & sharing my own starter-templates.
 
 # Contribute
 [How to contribute](./CONTRIBUTING.md)
