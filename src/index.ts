@@ -16,20 +16,22 @@ async function main () {
   const mockArgs = ['npx', 'startmeup']
   const cmdLineArgs = mockArgs
   // REMOVE BEFORE FLIGHT
+
+  printUsage()
   
   // const cmdLineArgs = process.argv
   // checkEmptyArgs(cmdLineArgs)
-  await checkGit()
-  const args = mapArgs(cmdLineArgs)
+  // await checkGit()
+  // const args = mapArgs(cmdLineArgs)
 
-  // Prepare git clone
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'startmeup-'))
-  console.log(tmpDir)
-  await doShallowClone(args.gitHttpsUrl, tmpDir)
+  // // Prepare git clone
+  // const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'startmeup-'))
+  // console.log(tmpDir)
+  // await doShallowClone(args.gitHttpsUrl, tmpDir)
   
-  // Copy the files they wanted into local directory
-  const { repoSubfolder, localFolder } = args
-  await execa(`cp -r ${path.join(tmpDir, repoSubfolder)} ${path.join(process.cwd(), localFolder)}`)
+  // // Copy the files they wanted into local directory
+  // const { repoSubfolder, localFolder } = args
+  // await execa(`cp -r ${path.join(tmpDir, repoSubfolder)} ${path.join(process.cwd(), localFolder)}`)
 
   // TODO: Make sure the .git files are not copied!
   // TODO: Make sure the copy command even works :)
@@ -110,11 +112,10 @@ function printUsage () {
   console.log('\t\thttps://<path to repo>.git')
   console.log('\t\thttps://<path to bundle>/startmeup.bundle.zip')
   console.log('branch\t\t(Optional) Branch to use (default: main)')
-  console.log('repoSubfolder\t(Optional) Repository subfolder (default: entire repo)')
+  console.log('repoSubfolder\t(Optional) Repository subfolder (default: .)')
   console.log('localFolder\t(Optional) Local folder to download to (default: CWD)')
   console.log('')
-  console.log(chalk.cyan('Missing support for Gitlab / Bitbucket?'))
-  console.log('Submit your PR:')
-  console.log('https://github.com/aGuyNamedJonas/startmeup')
+  console.log(chalk.cyan('Got bug, issue, PR, feedback?'))
+  console.log('https://github.com/aGuyNamedJonas/startmeup/CONTRIBUTING.md')
   console.log('')
 }
