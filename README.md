@@ -52,7 +52,7 @@ localFolder   (Optional) Local folder to download to (default: CWD)
 # Creating a startmeup.bundle.zip
 > Only works on Github, Gitlab and Bitbucket (not on custom or self-hosted git servers)  
 
-By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can significantly speed-up the usage of your starter (lets `startmeup` avoid running `git clone` in the background):
+By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can significantly speed-up the usage of your starter (avoids having to run git-clone):
 
 **How to create a startmeup.bundle.zip**  
 1. `cd` into your starter's (sub)folder  
