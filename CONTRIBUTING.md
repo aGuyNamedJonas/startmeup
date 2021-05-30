@@ -4,6 +4,8 @@
 
 ## 2. Tell your friends / colleagues about it
 
+## 3. Register your starters ([see how](../README.md))
+
 ## 3. Create an issues if you want to discuss an idea / share feedback
 
 ## 4. Create a PR if you want to make a practical suggestion

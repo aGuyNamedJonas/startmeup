@@ -35,18 +35,20 @@ For any `startmeup.bundle.zip` bundle registered in `starter.json`, you can simp
 Run startmeup without args to see usage (`$ npx startmeup`)  
 ```
 Usage:
-$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]  
+$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]
+$ npx startmeup starter [localFolder]
 
-Options:  
-repo          Repository to download from - has to be one of:  
-              github.com/<user>/<repo>  
-              gitlab.com/<user>/<repo>  
-              bitbucket.org/<user>/<repo>  
-              https://<path to repo>.git  
-              https://<path to bundle>/startmeup.bundle.zip  
-branch        (Optional) Branch to use (default: main)  
-repoSubfolder (Optional) Repository subfolder (default: .)  
-localFolder   (Optional) Local folder to download to (default: CWD)
+Options:
+repo            Repository to download from - has to be one of:
+                github.com/<user>/<repo>
+                gitlab.com/<user>/<repo>
+                bitbucket.org/<user>/<repo>
+                https://<path to repo>.git
+                https://<path to bundle>/startmeup.bundle.zip
+starter         Starter name of registered starter
+branch          (Optional) Branch to use (default: main)
+repoSubfolder   (Optional) Repository subfolder (default: .)
+localFolder     (Optional) Local folder to download to (default: CWD)
 ```
 
 # Creating a startmeup.bundle.zip
@@ -69,7 +71,7 @@ Now everyone can use your starter by simply running `$ npx startmeup <starter>`
 New entries to `starters.json` are auto-merged.
 
 # Why?
-I love the convenience of how tools like `create-react-app` or `cdk init` speed up development by downloading starter-templates for you.  
+I love the convenience that tools like `create-react-app` and `cdk init` provide by downloading starter-templates for you, that let you quickly start coding.  
 
 I wanted the same convenience for building, reusing & sharing my own starter-templates.
 
