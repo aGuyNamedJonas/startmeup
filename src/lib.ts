@@ -1,11 +1,23 @@
 import * as path from 'path'
 import urljoin from 'url-join'
 
-type StartmeupArgs = {
-  empty?: boolean,
-  isStarter?: boolean,
-  starter?: string,
-  starterSubfolder?: string,
+export function parseArgs (argsv: string[]): GitArgs | StarterArgs {
+  if (argsv.length === 2) {
+    return { empty: true } as GitArgs
+  }
+
+  const [npx, startmeup, starterOrRepo] = argsv
+  if (starterOrRepo.includes('/')) {
+    return parseGitArgs(argsv)
+  } else {
+    return parseStarterArgs(argsv)
+  }
+}
+
+// Args for:
+// $ npx startmeup repo[:branch] [repoSubfolder] [localFolder]
+export type GitArgs = {
+  empty: boolean,
   gitUrl: string,
   branch: string,
   possibleBundleUrl: string,
@@ -13,11 +25,15 @@ type StartmeupArgs = {
   localFolder: string,
 }
 
-export function parseArgs (argsv: string[]): StartmeupArgs {
-  if (argsv.length === 2) {
-    return { empty: true } as StartmeupArgs
-  }
+// Args for:
+// $ npx startmeup starter [localFolder]
+export type StarterArgs = {
+  empty: boolean,
+  starter: string,
+  localFolder: string,
+}
 
+function parseGitArgs (argsv: string[]): GitArgs {
   const [npx, startmeup, repo, repoFolderParam, localFolderParam] = argsv
 
   let gitUrl = ''
@@ -89,5 +105,17 @@ export function parseArgs (argsv: string[]): StartmeupArgs {
     possibleBundleUrl,
     repoFolder,
     localFolder,
-  } as StartmeupArgs
+  } as GitArgs
+}
+
+function parseStarterArgs (argsv: string[]): StarterArgs {
+  const [npx, startmeup, starter, localFolderParam] = argsv
+
+  const localFolderRaw = localFolderParam || '.'
+  const localFolder = path.join(process.cwd(), localFolderRaw)
+
+  return {
+    starter,
+    localFolder,
+  } as StarterArgs
 }
