@@ -127,4 +127,17 @@ describe('parseArgs', () => {
     expect(args.localFolder).toBe(path.join(process.cwd(), 'some/local/folder'))
     expect(path.isAbsolute(args.localFolder)).toBeTruthy()
   })
+
+  test('When starter arg is set, returns "isStarter": true and name of starter (in "starter")', () => {
+    const args = parseArgs(['npx', 'startmeup', 'starter-name'])
+    expect(args.isStarter).toBe(true)
+    expect(args.starter).toBe('starter-name')
+  })
+
+  test('When starter arg is set and repo-subfolder, starterSubfolder is set', () => {
+    const args = parseArgs(['npx', 'startmeup', 'starter-name', 'starter/sub/folder'])
+    expect(args.isStarter).toBe(true)
+    expect(args.starter).toBe('starter-name')
+    expect(args.starterSubfolder).toBe('starter/sub/folder')
+  })
 })

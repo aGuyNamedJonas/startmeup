@@ -3,6 +3,9 @@ import urljoin from 'url-join'
 
 type StartmeupArgs = {
   empty?: boolean,
+  isStarter?: boolean,
+  starter?: string,
+  starterSubfolder?: string,
   gitUrl: string,
   branch: string,
   possibleBundleUrl: string,

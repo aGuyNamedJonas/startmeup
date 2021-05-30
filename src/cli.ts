@@ -1,10 +1,14 @@
 import chalk from "chalk"
+import { StartMeUpArgs } from "./helper"
 
 export async function startmeup(
-  gitDownloader: (gitUrl: string, tempDir: string) => Promise<void>,
+  argsMapper: (argsv: string[]) => StartMeUpArgs,
   fetcher: (url: string, progressCb: (progress: number) => void) => Promise<void>,
+  gitCloner: (gitUrl: string, tempDir: string) => Promise<void>,
   fileCopier: (src: string, dst: string) => void,
   fileDestroyer: (target: string) => void,
+  unzipper: (src: string, dst: string) => void,
+  printUsage: () => void,
 ) {
   console.log('TODO: Implement ;)')
 }
