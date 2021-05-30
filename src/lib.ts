@@ -14,10 +14,16 @@ export function parseArgs (argsv: string[]): GitArgs | StarterArgs {
   }
 }
 
+export enum ArgTypes {
+  GIT = 'GIT',
+  STARTER = 'STARTER',
+}
+
 // Args for:
 // $ npx startmeup repo[:branch] [repoSubfolder] [localFolder]
 export type GitArgs = {
   empty: boolean,
+  type: ArgTypes.GIT,
   gitUrl: string,
   branch: string,
   possibleBundleUrl: string,
@@ -29,6 +35,7 @@ export type GitArgs = {
 // $ npx startmeup starter [localFolder]
 export type StarterArgs = {
   empty: boolean,
+  type: ArgTypes.STARTER
   starter: string,
   localFolder: string,
 }
@@ -100,6 +107,7 @@ function parseGitArgs (argsv: string[]): GitArgs {
   const localFolder = path.join(process.cwd(), localFolderRaw)
 
   return {
+    type: ArgTypes.GIT,
     gitUrl,
     branch,
     possibleBundleUrl,
@@ -115,6 +123,7 @@ function parseStarterArgs (argsv: string[]): StarterArgs {
   const localFolder = path.join(process.cwd(), localFolderRaw)
 
   return {
+    type: ArgTypes.STARTER,
     starter,
     localFolder,
   } as StarterArgs

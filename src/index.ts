@@ -5,7 +5,6 @@ import * as path from 'path'
 import * as os from 'os'
 import ora from "ora"
 import { isGitInstalled, shallowClone } from "./git"
-import { checkAndMapArgs, printError, StartMeUpArgs } from "./helper"
 import execa from 'execa'
 import { startmeup } from './startmeup'
 
