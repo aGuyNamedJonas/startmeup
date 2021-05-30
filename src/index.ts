@@ -7,7 +7,7 @@ import ora from "ora"
 import { isGitInstalled, shallowClone } from "./git"
 import { checkAndMapArgs, printError, StartMeUpArgs } from "./helper"
 import execa from 'execa'
-import { startmeup } from './cli'
+import { startmeup } from './startmeup'
 
 startmeup()
 

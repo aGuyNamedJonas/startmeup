@@ -4,10 +4,10 @@ import { StartMeUpArgs } from "./helper"
 export async function startmeup(
   argsMapper: (argsv: string[]) => StartMeUpArgs,
   fetcher: (url: string, progressCb: (progress: number) => void) => Promise<void>,
-  gitCloner: (gitUrl: string, tempDir: string) => Promise<void>,
-  fileCopier: (src: string, dst: string) => void,
-  fileDestroyer: (target: string) => void,
-  unzipper: (src: string, dst: string) => void,
+  git: (gitCmd: string) => Promise<void>,
+  fileCopier: (sourceFolder: string, targetFolder: string) => void,
+  fileDestroyer: (targetFile: string) => void,
+  unzip: (sourceFile: string, targetFolder: string) => void,
   printUsage: () => void,
 ) {
   console.log('TODO: Implement ;)')
