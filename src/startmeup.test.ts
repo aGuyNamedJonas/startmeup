@@ -1,6 +1,6 @@
 import { ArgTypes, GitArgs } from "./lib"
 import { startmeup, StartmeupProps } from "./startmeup"
-import { parseArgs as actualParseArgs } from './lib'
+import { argsParser as actualParseArgs } from './lib'
 
 beforeEach(() => {
   jest.resetAllMocks()

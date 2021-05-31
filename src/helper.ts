@@ -3,6 +3,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import execa from 'execa'
+import extract from 'extract-zip'
+import { ncp } from 'ncp'
 
 // Stolen from:
 // https://stackoverflow.com/a/26038979
@@ -18,7 +20,8 @@ export function fetcher(url: string, destinationFolder: string): Promise<void> {
     var responseSent = false;
     https.get(url, (response: any) => {
       if (response.statusCode !== 200) {
-        throw new Error('Non 200 response code: ' + response.statusCode)
+        reject('Non 200 response code: ' + response.statusCode)
+        return
       }
 
       const file = fs.createWriteStream(outputFile);
@@ -49,4 +52,22 @@ export function tempDirCreator () {
 
 export async function git (gitCmd: string): Promise<void> {
   return await execa.command(`git ${gitCmd}`) as unknown as Promise<void>
+}
+
+export async function unzip (sourceFile: string, targetFolder: string): Promise<void> {
+  await extract(sourceFile, { dir: targetFolder })
+}
+
+export async function fileCopier (sourceFolder: string, destinationFolder: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    ncp(sourceFolder, destinationFolder, {
+      filter: (fileName: string) => !fileName.includes('.git/')
+    }, (err: any) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
 }

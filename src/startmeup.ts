@@ -23,7 +23,7 @@ export type StartmeupProps = {
   fetcher: (url: string, targetFolder: string, progressCb?: (progress: number) => void) => Promise<void>,
   git: (gitCmd: string) => Promise<void>,
   tempDirCreator: () => string,
-  fileCopier: (sourceFolder: string, targetFolder: string) => void,
+  fileCopier: (sourceFolder: string, targetFolder: string) => Promise<void>,
   fileDestroyer: (targetFile: string) => void,
   unzip: (sourceFile: string, targetFolder: string) => void,
   printUsage: () => void,
@@ -42,7 +42,6 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
     printUsage,
   } = props
   const tempDir = tempDirCreator()
-  console.log('tempDir: ', tempDir)
 
   let bundleLocalPath
   if (args.possibleBundleUrl) {
@@ -56,7 +55,6 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
     bundleLocalPath = ''
   }
 
-  console.log('bundleLocalPath: ', bundleLocalPath)
   if (!bundleLocalPath) {
     try {
       await git('version')
@@ -65,12 +63,11 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
     }
 
     await git(`clone --depth=1 ${args.gitUrl} ${tempDir}`)
-    fileCopier(
+    await fileCopier(
       path.join(tempDir, args.repoFolder),
       args.localFolder,
     )
-    console.log('Copied from: ', path.join(tempDir, args.repoFolder))
-    console.log('Copied to: ', args.localFolder)
+    
     fileDestroyer(tempDir)
 
     return
