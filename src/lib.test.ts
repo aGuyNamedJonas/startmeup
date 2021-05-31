@@ -43,8 +43,8 @@ describe('parseArgs', () => {
     })
   
     test('Correctly extracts custom branch or sticks with default ("main")', () => {
-      const defaultArgs = parseArgs(['npx', 'startmeup', 'github.com/user/repo'])
-      const customArgs = parseArgs(['npx', 'startmeup', 'gitlab.com/user/repo:development'])
+      const defaultArgs = parseArgs(['npx', 'startmeup', 'github.com/user/repo']) as GitArgs
+      const customArgs = parseArgs(['npx', 'startmeup', 'gitlab.com/user/repo:development']) as GitArgs
       
       expect(defaultArgs.branch).toBe('main')
       expect(customArgs.branch).toBe('development')
