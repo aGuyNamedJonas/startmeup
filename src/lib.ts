@@ -1,7 +1,7 @@
 import * as path from 'path'
 import urljoin from 'url-join'
 
-export function parseArgs (argsv: string[]): GitArgs | StarterArgs {
+export function argsParser (argsv: string[]): GitArgs | StarterArgs {
   if (argsv.length === 2) {
     return { empty: true } as GitArgs
   }
