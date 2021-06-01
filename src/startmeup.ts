@@ -67,7 +67,7 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
       path.join(tempDir, args.repoFolder),
       args.localFolder,
     )
-    
+
     fileDestroyer(tempDir)
 
     return
@@ -80,7 +80,9 @@ async function runStarterVariant (props: StartmeupProps, args: StarterArgs) {
 
 }
 
-async function unboxLocalBundle (bundleLocalPath: string, props: StartmeupProps) {}
+async function unboxLocalBundle (bundleLocalPath: string, props: StartmeupProps) {
+  
+}
 
 export function printError(error: Error) {
   console.log('')

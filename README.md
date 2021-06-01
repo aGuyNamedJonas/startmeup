@@ -1,6 +1,10 @@
 # startmeup
 > Jumpstart coding by downloading any git repo (sub)folder
 
+`$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]` (see [Usage](#usage))  
+
+`$ npx startmeup starter [localFolder]` (see [Starters](#starters))
+
 # Features
 **✓ Download from any git repo** - Github, Bitbucket, Gitlab and custom git servers supported  
 **✓ Repo subfolder support** - Keep multiple starters in one repo  
@@ -10,7 +14,10 @@
 # Starters
 > Just run `$ npx startmeup <starter>` ([Add your own starters](#add-your-own-starters))
 
-[cdk-construct-starter](https://github.com/aGuyNamedJonas/cdk-construct-starter) · [cdk-stack-starter](https://github.com/aGuyNamedJonas/cdk-stack-starter)
+#### **CDK**
+
+* [cdk-construct-starter](https://github.com/aGuyNamedJonas/cdk-construct-starter) - Sensible, minimalistic CDK Construct Starter
+* [cdk-stack-starter](https://github.com/aGuyNamedJonas/cdk-stack-starter) - Sensible, minimalistic CDK Stack Starter
 
 # Usage
 ## 1. The universal way

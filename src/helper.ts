@@ -6,6 +6,8 @@ import execa from 'execa'
 import extract from 'extract-zip'
 import { ncp } from 'ncp'
 
+// TODO: Test this, yes even this stuff can be tested, Jonas :)
+
 // Stolen from:
 // https://stackoverflow.com/a/26038979
 export function fetcher(url: string, destinationFolder: string): Promise<void> {
