@@ -38,26 +38,21 @@ describe('startmeup', () => {
   describe('Git variant ($ npx startmeup repo[:branch] [repoSubfolder] [localFolder])', () => {
     beforeEach(() => jest.restoreAllMocks())
 
-    const repo = 'github.com/user/repo'
-    const repoFolder = 'some/repo/subfolder'
-    const tempDir = '/tmp/dir'
-    const localFolder = '/some/local/folder'
-
     // args
     const mockArgs = {
       type: ArgTypes.GIT,
       gitUrl: 'https://github.com/user/repo.git',
       possibleBundleUrl: 'https://raw.githubusercontent.com/user/repo/main/startmeup.bundle.zip',
-      repoFolder,
-      localFolder,
+      repoFolder: 'some/repo/subfolder',
+      localFolder: '/some/local/folder',
     }
 
 
     test('Creates temp dir', async () => {
-      const argsv = ['npx', 'startmeup', repo]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
 
@@ -66,21 +61,21 @@ describe('startmeup', () => {
     })
 
     test('Try to fetch mappedArgs.possibleBundleUrl (if set)', async () => {
-      const argsv = ['npx', 'startmeup', repo]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
       const fetcher = jest.fn()
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
 
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier } as unknown as StartmeupProps)
-      expect(fetcher).toHaveBeenCalledWith(mockArgs.possibleBundleUrl, tempDir)
+      expect(fetcher).toHaveBeenCalledWith(mockArgs.possibleBundleUrl, '/tmp/dir')
     })
 
     test('If no startmeup.bundle.zip is found, throw if git is not installed...', async () => {
-      const argsv = ['npx', 'startmeup', repo]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
 
       const fetcher = jest.fn().mockRejectedValueOnce('network error about not being able to fetch startmeup.bundle.zip')
       const git = jest.fn().mockRejectedValueOnce('command not found: git')
@@ -93,23 +88,23 @@ describe('startmeup', () => {
     })
   
     test('...otherwise, git-clone into temp folder', async () => {
-      const argsv = ['npx', 'startmeup', repo]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
       const fetcher = jest.fn().mockRejectedValue(false)
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
 
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer } as unknown as StartmeupProps)
-      expect(git).toHaveBeenCalledWith(`clone --depth=1 ${mockArgs.gitUrl} ${tempDir}`)
+      expect(git).toHaveBeenCalledWith(`clone --depth=1 ${mockArgs.gitUrl} /tmp/dir`)
     })
 
     test('Throw if git clone fails', async () => {
-      const argsv = ['npx', 'startmeup', repo]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const fetcher = jest.fn().mockRejectedValue(false)
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       
       const git = jest.fn(async (gitCmd: string) => {
         if (gitCmd.startsWith('version')) {
@@ -129,29 +124,48 @@ describe('startmeup', () => {
     })
 
     test('Copy clone (sub)folder into destination', async () => {
-      const argsv = ['npx', 'startmeup', repo, repoFolder]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo', 'some/repo/subfolder']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
       const fetcher = jest.fn().mockRejectedValue(false)
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
 
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer } as unknown as StartmeupProps)
-      expect(fileCopier).toHaveBeenCalledWith(`${tempDir}/${repoFolder}`, localFolder)
+      expect(fileCopier).toHaveBeenCalledWith(`/tmp/dir/some/repo/subfolder`, '/some/local/folder')
     })
 
     test('Delete temp folder', async () => {
-      const argsv = ['npx', 'startmeup', repo, repoFolder]
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo', 'some/repo/subfolder']
       const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
       const fetcher = jest.fn().mockRejectedValue(false)
-      const tempDirCreator = jest.fn(() => tempDir)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer } as unknown as StartmeupProps)
-      expect(fileDestroyer).toHaveBeenCalledWith(tempDir)
+      expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir')
+    })
+
+    test('If startmeup.bundle.zip is found, download it, extract it, move the files to the right place, then delete the temp folder', async () => {
+      const argsv = ['npx', 'startmeup', 'github.com/user/repo', 'some/repo/subfolder']
+      const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
+      const git = jest.fn().mockResolvedValue(true)
+      const fetcher = jest.fn().mockResolvedValue(true)
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
+      const fileCopier = jest.fn()
+      const fileDestroyer = jest.fn()
+      const unzip = jest.fn()
+      
+      await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip } as unknown as StartmeupProps)
+      expect(fetcher).toHaveBeenCalledWith('https://raw.githubusercontent.com/user/repo/main/some/repo/subfolder/startmeup.bundle.zip')
+      expect(tempDirCreator).toHaveBeenCalled()
+      expect(unzip).toHaveBeenCalledWith('/tmp/dir/startmeup.bundle.zip', '/tmp/dir')
+      expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir/startmeup.bundle.zip')
+      expect(fileCopier).toHaveBeenCalledWith('/tmp/dir', process.cwd())
+      expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir')
     })
   })
 
