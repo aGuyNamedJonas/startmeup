@@ -9,6 +9,9 @@
   "bin": {
     "startmeup": "bin/index.js"
   },
+  "jest": {
+    "testPathIgnorePatterns": ["/bin"]
+  },
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "watch": "nodemon",
