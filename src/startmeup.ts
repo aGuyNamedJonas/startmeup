@@ -1,6 +1,7 @@
 import * as path from 'path'
+import * as fs from 'fs'
 import chalk from "chalk"
-import { ArgTypes, GitArgs, StarterArgs } from "./lib"
+import { ArgTypes, GitArgs, StarterArgs, StarterJsonConfig } from "./lib"
 
 export async function startmeup (props: StartmeupProps) {
   const args = props.argsParser(props.argsv)
@@ -20,7 +21,7 @@ export async function startmeup (props: StartmeupProps) {
 export type StartmeupProps = {
   argsv: string[],
   argsParser: (argsv: string[]) => GitArgs | StarterArgs,
-  fetcher: (url: string, targetFolder: string, progressCb?: (progress: number) => void) => Promise<void>,
+  fetcher: (url: string, targetFolder?: string, progressCb?: (progress: number) => void) => Promise<string>,
   git: (gitCmd: string) => Promise<void>,
   tempDirCreator: () => string,
   fileCopier: (sourceFolder: string, targetFolder: string) => Promise<void>,
@@ -81,7 +82,28 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
 }
 
 async function runStarterVariant (props: StartmeupProps, args: StarterArgs) {
+  const {
+    argsv,
+    argsParser,
+    fetcher,
+    git,
+    tempDirCreator,
+    fileCopier,
+    fileDestroyer,
+    unzip,
+    printUsage,
+  } = props
+  const tempDir = tempDirCreator()
 
+  const starters = await fetcher(args.startersJsonUrl) as unknown as StarterJsonConfig
+  if (!starters) {
+    throw new Error('Could not load starters.json')
+  }
+
+  const starterConfig = starters[args.starter]
+  if (!starterConfig) {
+    throw new Error('Could not find starter in starters.json')
+  }
 }
 
 export function printError(error: Error) {

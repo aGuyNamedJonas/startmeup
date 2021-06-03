@@ -38,6 +38,7 @@ export type StarterArgs = {
   type: ArgTypes.STARTER
   starter: string,
   localFolder: string,
+  startersJsonUrl: string,
 }
 
 function parseGitArgs (argsv: string[]): GitArgs {
@@ -116,15 +117,25 @@ function parseGitArgs (argsv: string[]): GitArgs {
   } as GitArgs
 }
 
+export type StarterJsonConfig = {
+  [starterName: string]: {
+    bundleUrl: string,
+    repo: string,
+    description: string,
+    category: string,
+  }
+}
 function parseStarterArgs (argsv: string[]): StarterArgs {
   const [npx, startmeup, starter, localFolderParam] = argsv
 
   const localFolderRaw = localFolderParam || '.'
   const localFolder = path.join(process.cwd(), localFolderRaw)
+  const startersJsonUrl = 'https://raw.githubusercontent.com/aGuyNamedJonas/startmeup/main/starter.json'
 
   return {
     type: ArgTypes.STARTER,
     starter,
     localFolder,
+    startersJsonUrl,
   } as StarterArgs
 }

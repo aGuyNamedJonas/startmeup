@@ -1,4 +1,4 @@
-import { ArgTypes, GitArgs } from "./lib"
+import { ArgTypes, GitArgs, StarterArgs } from "./lib"
 import { startmeup, StartmeupProps } from "./startmeup"
 import { argsParser as actualParseArgs } from './lib'
 
@@ -12,7 +12,10 @@ describe('startmeup', () => {
       const argsv = ['npx', 'startmeup', 'starter-name']
       const argsParser = jest.fn(() => ({} as GitArgs))
 
-      await startmeup({ argsv, argsParser } as unknown as StartmeupProps)
+      const tempDirCreator = jest.fn()
+      const fetcher = jest.fn()
+
+      await startmeup({ argsv, argsParser, tempDirCreator, fetcher } as unknown as StartmeupProps)
       expect(argsParser).toHaveBeenCalledWith(argsv)
     })
 
@@ -178,8 +181,61 @@ describe('startmeup', () => {
   })
 
   describe('Starter variant ($ npx startmeup starter [localFolder])', () => {
-    test.todo('If starter-shorthand is provided, look it up in starters.json')
-    test.todo('Throw if starter cannot be found in starters.json')
+    test('If starter-shorthand is provided, look it up in starters.json', async () => {
+      const argsv = ['npx', 'startmeup', 'some-starter']
+      const argsParser = jest.fn(() => ({
+        type: ArgTypes.STARTER,
+        starter: 'some-starter',
+        localFolder: '/some/local/folder',
+        startersJsonUrl: 'https://url.com/to/the/starter.json',
+      } as StarterArgs))
+      const git = jest.fn().mockResolvedValue(true)
+      const fetcher = jest.fn().mockResolvedValue(({
+        "some-starter": {
+          "bundleUrl": "https://raw.githubusercontent.com/aGuyNamedJonas/cdk-stack-starter/main/startmeup.bundle.zip",
+          "repo": "https://github.com/aGuyNamedJonas/cdk-stack-starter",
+          "description": "Sensible, minimalistic CDK Stack Starter",
+          "category": "CDK"
+        }
+      }))
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
+      const fileCopier = jest.fn()
+      const fileDestroyer = jest.fn()
+      const unzip = jest.fn().mockResolvedValue(true)
+      
+      await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip } as unknown as StartmeupProps)
+      expect(tempDirCreator).toHaveBeenCalled()
+      expect(fetcher).toHaveBeenCalledWith('https://url.com/to/the/starter.json', '/tmp/dir')
+    })
+
+    test('Throw if starter cannot be found in starters.json', async () => {
+      const argsv = ['npx', 'startmeup', 'starter-does-not-exist']
+      const argsParser = jest.fn(() => ({
+        type: ArgTypes.STARTER,
+        starter: 'some-starter',
+        localFolder: '/some/local/folder',
+        startersJsonUrl: 'https://url.com/to/the/starters.json',
+      } as StarterArgs))
+      const git = jest.fn().mockResolvedValue(true)
+      const fetcher = jest.fn().mockResolvedValue(({
+        "some-starter": {
+          "bundleUrl": "https://raw.githubusercontent.com/aGuyNamedJonas/cdk-stack-starter/main/startmeup.bundle.zip",
+          "repo": "https://github.com/aGuyNamedJonas/cdk-stack-starter",
+          "description": "Sensible, minimalistic CDK Stack Starter",
+          "category": "CDK"
+        }
+      }))
+      const tempDirCreator = jest.fn(() => '/tmp/dir')
+      const fileCopier = jest.fn()
+      const fileDestroyer = jest.fn()
+      const unzip = jest.fn().mockResolvedValue(true)
+      
+      expect(async () => {
+        await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip } as unknown as StartmeupProps)
+      }).toThrowError('Could not find starter in starters.json')
+    })
+
+
     test.todo('Use bundleUrl of starter to fetch startmeup.bundle.zip')
     test.todo('Throw if bundle cannot be downloaded')
     test.todo('Unzip downloaded bundle to mappedArgs.localFolder')
