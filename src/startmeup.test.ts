@@ -67,8 +67,10 @@ describe('startmeup', () => {
       const fetcher = jest.fn()
       const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
+      const fileDestroyer = jest.fn()
+      const unzip = jest.fn().mockResolvedValue(true)
 
-      await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier } as unknown as StartmeupProps)
+      await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip } as unknown as StartmeupProps)
       expect(fetcher).toHaveBeenCalledWith(mockArgs.possibleBundleUrl, '/tmp/dir')
     })
 
@@ -151,20 +153,26 @@ describe('startmeup', () => {
 
     test('If startmeup.bundle.zip is found, download it, extract it, move the files to the right place, then delete the temp folder', async () => {
       const argsv = ['npx', 'startmeup', 'github.com/user/repo', 'some/repo/subfolder']
-      const argsParser = jest.fn(() => ({ ...mockArgs } as GitArgs))
+      const argsParser = jest.fn(() => ({
+        type: ArgTypes.GIT,
+        gitUrl: 'https://github.com/user/repo.git',
+        possibleBundleUrl: 'https://raw.githubusercontent.com/user/repo/main/some/repo/subfolder/startmeup.bundle.zip',
+        repoFolder: 'some/repo/subfolder',
+        localFolder: '/some/local/folder',
+      } as GitArgs))
       const git = jest.fn().mockResolvedValue(true)
       const fetcher = jest.fn().mockResolvedValue(true)
       const tempDirCreator = jest.fn(() => '/tmp/dir')
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
-      const unzip = jest.fn()
+      const unzip = jest.fn().mockResolvedValue(true)
       
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip } as unknown as StartmeupProps)
-      expect(fetcher).toHaveBeenCalledWith('https://raw.githubusercontent.com/user/repo/main/some/repo/subfolder/startmeup.bundle.zip')
+      expect(fetcher).toHaveBeenCalledWith('https://raw.githubusercontent.com/user/repo/main/some/repo/subfolder/startmeup.bundle.zip', '/tmp/dir')
       expect(tempDirCreator).toHaveBeenCalled()
       expect(unzip).toHaveBeenCalledWith('/tmp/dir/startmeup.bundle.zip', '/tmp/dir')
       expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir/startmeup.bundle.zip')
-      expect(fileCopier).toHaveBeenCalledWith('/tmp/dir', process.cwd())
+      expect(fileCopier).toHaveBeenCalledWith('/tmp/dir', '/some/local/folder')
       expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir')
     })
   })

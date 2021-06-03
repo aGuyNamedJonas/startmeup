@@ -25,7 +25,7 @@ export type StartmeupProps = {
   tempDirCreator: () => string,
   fileCopier: (sourceFolder: string, targetFolder: string) => Promise<void>,
   fileDestroyer: (targetFile: string) => void,
-  unzip: (sourceFile: string, targetFolder: string) => void,
+  unzip: (sourceFile: string, targetFolder: string) => Promise<void>,
   printUsage: () => void,
 }
 
@@ -73,15 +73,15 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
     return
   }
 
-  unboxLocalBundle(bundleLocalPath, props)
+  // unbox local bundle
+  await unzip(bundleLocalPath, tempDir)
+  await fileDestroyer(bundleLocalPath)
+  await fileCopier(tempDir, args.localFolder)
+  await fileDestroyer(tempDir)
 }
 
 async function runStarterVariant (props: StartmeupProps, args: StarterArgs) {
 
-}
-
-async function unboxLocalBundle (bundleLocalPath: string, props: StartmeupProps) {
-  
 }
 
 export function printError(error: Error) {
