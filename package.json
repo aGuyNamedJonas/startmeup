@@ -18,7 +18,8 @@
     "build": "tsc",
     "prepublish": "npm run build",
     "test": "jest",
-    "west": "jest --watch"
+    "west": "jest --watch",
+    "check-starters": "node does-not-exist-should-throw.js"
   },
   "dependencies": {
     "@types/glob": "^7.1.3",
