@@ -65,10 +65,14 @@ async function runGitVariant (props: StartmeupProps, args: GitArgs) {
     }
 
     await git(`clone --depth=1 ${args.gitUrl} ${tempDir}`)
-    await fileCopier(
-      path.join(tempDir, args.repoFolder),
-      args.localFolder,
-    )
+    try {
+      await fileCopier(
+        path.join(tempDir, args.repoFolder),
+        args.localFolder,
+      )
+    } catch (error) {
+      throw new Error(`Could not find subfolder in repo: ${args.repoFolder}`)
+    }
 
     fileDestroyer(tempDir)
 
