@@ -1,6 +1,8 @@
 # startmeup
 > Jumpstart coding by downloading any git repo (sub)folder
 
+> **Still working on a few things:** In case you already stumble upon this on NPM, I'm currently adding more console output & preparing a few last things for you to contribute your starters - it already works though (04. June 2021)
+
 `$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]` (see [Usage](#usage))  
 
 `$ npx startmeup starter [localFolder]` (see [Starters](#starters))
