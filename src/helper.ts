@@ -48,6 +48,10 @@ export function fileDestroyer (targetFile: string){
   fs.rmdirSync(targetFile, { recursive: true })
 }
 
+export function fileReader (targetFile: string) {
+  return fs.readFileSync(targetFile, { encoding: 'utf-8' })
+}
+
 export function tempDirCreator () {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'startmeup-')) 
 }

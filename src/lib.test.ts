@@ -136,9 +136,9 @@ describe('argsParser', () => {
       expect(args.starter).toBe('starter-name')
     })
 
-    test('startersJsonUrl is set to aGuyNamedJonas.com/startmeup/starters.json', () => {
+    test('startersJsonUrl is set to aGuyNamedJonas.com/startmeup/starters/<starter bane>.json', () => {
       const args = argsParser(['npx', 'startmeup', 'starter-name']) as StarterArgs
-      expect(args.startersJsonUrl).toBe('https://raw.githubusercontent.com/aGuyNamedJonas/startmeup/main/starter.json')
+      expect(args.starterJsonUrl).toBe('https://raw.githubusercontent.com/aGuyNamedJonas/startmeup/main/starters/starter-name.json')
     })
 
     test('Default for localFolder is "." (and is an absolute path, using cwd as base)', () => {

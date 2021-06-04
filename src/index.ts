@@ -6,7 +6,7 @@ import ora from "ora"
 import execa from 'execa'
 import { argsParser } from './lib'
 import { printError, printUsage, startmeup } from './startmeup'
-import { fetcher, fileDestroyer, fileCopier, tempDirCreator, git, unzip } from './helper'
+import { fetcher, fileDestroyer, fileReader, fileCopier, tempDirCreator, git, unzip } from './helper'
 
 main()
 
@@ -23,6 +23,7 @@ async function main () {
       tempDirCreator,
       fileCopier,
       fileDestroyer,
+      fileReader,
       unzip,
       printUsage,
     })

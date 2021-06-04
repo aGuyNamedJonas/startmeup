@@ -21,11 +21,12 @@ export async function startmeup (props: StartmeupProps) {
 export type StartmeupProps = {
   argsv: string[],
   argsParser: (argsv: string[]) => GitArgs | StarterArgs,
-  fetcher: (url: string, targetFolder?: string, progressCb?: (progress: number) => void) => Promise<string>,
+  fetcher: (url: string, targetFolder: string, progressCb?: (progress: number) => void) => Promise<void>,
   git: (gitCmd: string) => Promise<void>,
   tempDirCreator: () => string,
   fileCopier: (sourceFolder: string, targetFolder: string) => Promise<void>,
   fileDestroyer: (targetFile: string) => void,
+  fileReader: (filePath: string) => string,
   unzip: (sourceFile: string, targetFolder: string) => Promise<void>,
   printUsage: () => void,
 }
@@ -90,20 +91,27 @@ async function runStarterVariant (props: StartmeupProps, args: StarterArgs) {
     tempDirCreator,
     fileCopier,
     fileDestroyer,
+    fileReader,
     unzip,
     printUsage,
   } = props
   const tempDir = tempDirCreator()
 
-  const starters = await fetcher(args.startersJsonUrl) as unknown as StarterJsonConfig
-  if (!starters) {
-    throw new Error('Could not load starters.json')
+  try {
+    await fetcher(args.starterJsonUrl, tempDir)
+  } catch (error) {
+    throw new Error(`Could not find ${args.starterJsonUrl}`)
   }
 
-  const starterConfig = starters[args.starter]
-  if (!starterConfig) {
-    throw new Error('Could not find starter in starters.json')
+  const { bundleUrl, repo, description, category } = fileReader(path.join(tempDir, path.basename(args.starterJsonUrl))) as unknown as StarterJsonConfig
+  try {
+    await fetcher(bundleUrl, tempDir)
+  } catch (error) {
+    throw new Error(`Could not fetch ${bundleUrl}`)
   }
+
+  await unzip(path.join(tempDir, 'startmeup.bundle.zip'), args.localFolder)
+  await fileDestroyer(tempDir)
 }
 
 export function printError(error: Error) {
