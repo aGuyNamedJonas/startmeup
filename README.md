@@ -1,4 +1,4 @@
-# startmeup
+# startmeup ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)
 > Jumpstart coding by downloading any git repo (sub)folder
 
 > **Still working on a few things:** In case you already stumble upon this on NPM, I'm currently adding more console output & preparing a few last things for you to contribute your starters - it already works though (04. June 2021)
@@ -78,6 +78,12 @@ After you created a `startmeup.bundle.zip` bundle (see above) to speed up the wh
 Now everyone can use your starter by simply running `$ npx startmeup <starter>`
 
 New entries to `starters.json` are auto-merged.
+
+> **BONUS POINTS**  
+> Add the `startmeup` badge to your repo's README:  
+> 
+> ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)  
+> `![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)`
 
 # Why?
 I love the convenience that tools like `create-react-app` and `cdk init` provide by downloading starter-templates for you, that let you quickly start coding.  
