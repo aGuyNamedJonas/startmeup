@@ -67,7 +67,7 @@ By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can sig
 
 **How to create a startmeup.bundle.zip**  
 1. `cd` into your starter's (sub)folder  
-2. Run `$ zip -r startmeup.bundle.zip . -x ".git/*"`  
+2. Run `$ zip -r startmeup.bundle.zip . -x ".git/*" -x "startmeup.bundle.zip"`  
 (Includes hidden files, excludes .git folder)
 3. Commit & Push
 4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone
