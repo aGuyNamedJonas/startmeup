@@ -16,10 +16,14 @@
 # Starters
 > Just run `$ npx startmeup <starter>` ([Add your own starters](#add-your-own-starters))
 
+<!---STARTER_LIST_START-->
+
 #### **CDK**
 
 * [cdk-construct-starter](https://github.com/aGuyNamedJonas/cdk-construct-starter) - Sensible, minimalistic CDK Construct Starter
 * [cdk-stack-starter](https://github.com/aGuyNamedJonas/cdk-stack-starter) - Sensible, minimalistic CDK Stack Starter
+
+<!---STARTER_LIST_END-->
 
 # Usage
 ## 1. The universal way
@@ -72,12 +76,14 @@ By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can sig
 3. Commit & Push
 4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone
 
-# Add your own starters
-After you created a `startmeup.bundle.zip` bundle (see above) to speed up the whole process, make it convenient by adding the bundle to `starters.json`.
+# Register your starter
+After your created a `startmeup.bundle.zip` bundle (see above), you can make it even more convenient for people to use by adding it to the collection of [startmeup-starters](https://github.com/aGuyNamedJonas/startmeup-starters).
 
-Now everyone can use your starter by simply running `$ npx startmeup <starter>`
+Now everyone can download your starter by simply running `$ npx startmeup <starter>`.
 
-New entries to `starters.json` are auto-merged.
+Starters are auto-merged upon validation & automatically added to the growing list of starters at the top of this README.
+
+See [Register your starter](https://github.com/aGuyNamedJonas/startmeup-starters#add-your-starter) over on the [startmeup-starters](https://github.com/aGuyNamedJonas/startmeup-starters) repo.
 
 > **BONUS POINTS**  
 > Add the `startmeup` badge to your repo's README:  
