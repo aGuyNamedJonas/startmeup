@@ -1,6 +1,11 @@
 # startmeup ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)
 > Jumpstart coding by downloading any git repo (sub)folder
 
+### TODO:
+- [ ] Add starters back to this repo
+- [ ] Build merge-bot (merging only when starter files are okay & only those were changed)
+- [ ] Build back the documentation on registering starters
+
 > **Still working on a few things:** In case you already stumble upon this on NPM, I'm currently adding more console output & preparing a few last things for you to contribute your starters - it already works though (04. June 2021)
 
 `$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]` (see [Usage](#usage))  
@@ -40,7 +45,7 @@ Startmeup automatically checks for the presence of a `startmeup.bundle.zip` in t
 ## 3. The convenient way
 `$ npx startmeup cdk-stack-starter`  
 
-For any `startmeup.bundle.zip` bundle registered in `starter.json`, you can simply run `$ npx startmeup <starter>`.  
+For any `startmeup.bundle.zip` bundle registered in `/starters`, you can simply run `$ npx startmeup <starter>`.  
 
 [Add your own starters](#add-your-own-starters)
 
@@ -77,13 +82,14 @@ By adding a `startmeup.bundle.zip` file to your repo (or subfolder), you can sig
 4. Run `$ npx startmeup github.com/your-user/your-repo <subfolder>` - startmeup will now detect your bundle and download that instead of doing a full git clone
 
 # Register your starter
-After your created a `startmeup.bundle.zip` bundle (see above), you can make it even more convenient for people to use by adding it to the collection of [startmeup-starters](https://github.com/aGuyNamedJonas/startmeup-starters).
+After your created a `startmeup.bundle.zip` bundle (see above), you can make it even more convenient for people to use by adding to `/starters`.
 
 Now everyone can download your starter by simply running `$ npx startmeup <starter>`.
 
 Starters are auto-merged upon validation & automatically added to the growing list of starters at the top of this README.
 
-See [Register your starter](https://github.com/aGuyNamedJonas/startmeup-starters#add-your-starter) over on the [startmeup-starters](https://github.com/aGuyNamedJonas/startmeup-starters) repo.
+See [Registering your starter](./starters/README.md) in the `/starters` README.
+
 
 > **BONUS POINTS**  
 > Add the `startmeup` badge to your repo's README:  
