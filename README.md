@@ -90,13 +90,6 @@ Starters are auto-merged upon validation & automatically added to the growing li
 
 See [Registering your starter](./starters/README.md) in the `/starters` README.
 
-
-> **BONUS POINTS**  
-> Add the `startmeup` badge to your repo's README:  
-> 
-> ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)  
-> `![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)`
-
 # Why?
 I love the convenience that tools like `create-react-app` and `cdk init` provide by downloading starter-templates for you, that let you quickly start coding.  
 
