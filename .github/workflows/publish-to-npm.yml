@@ -12,8 +12,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
+      - run: git config --global user.email "hi@aGuyNamedJonas.com"
+      - run: git config --global user.name "startmeup's publish bot"
       - run: npm install
       - run: npm test
+      - run: npm run add-starters-to-readme
+      - run: git add README.md
+      - run: git commit -m 'Update starters in README.md'
       - run: npm version patch
       - uses: JS-DevTools/npm-publish@v1
         with:
