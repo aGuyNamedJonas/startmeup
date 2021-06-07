@@ -15,7 +15,7 @@ After you're done registering it here, anyone can simply run:
 Just copy'n'adapt one of the existing files ou find here, or see [reference](#reference) for full docs.
 
 ## Step #3
-**Submit a PR** with your starter changes. PRs for starter files are auto-merged on successful validation.
+**Submit a PR** with your starter changes. I will merge them as quickly as I can (there's two status checks to help me do that).
 
 ## Step #4
 **Add the badge** to your repo:  

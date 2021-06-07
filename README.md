@@ -1,12 +1,6 @@
 # startmeup ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)
 > Jumpstart coding by downloading any git repo (sub)folder
 
-### TODO:
-- [x] Add starters back to this repo
-- [ ] Build merge-bot (merging only when starter files are okay & only those were changed)
-- [x] Build back the documentation on registering starters
-- [ ] Delete startmeup-starters repo
-
 > **Still working on a few things:** In case you already stumble upon this on NPM, I'm currently adding more console output & preparing a few last things for you to contribute your starters - it already works though (04. June 2021)
 
 `$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]` (see [Usage](#usage))  
