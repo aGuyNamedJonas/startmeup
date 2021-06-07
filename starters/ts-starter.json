@@ -1,5 +1,5 @@
 {
-  "bundleUrl": "https://github.com/aGuyNamedJonas/ts-starter/raw/main/startmeup.bundle.zip",
+  "bundleUrl": "https://raw.githubusercontent.com/aGuyNamedJonas/ts-starter/main/startmeup.bundle.zip",
   "repo": "https://github.com/aGuyNamedJonas/ts-starter",
   "description": "Typescript starter with nodemon & jest",
   "category": "Typescript"
