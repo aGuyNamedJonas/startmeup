@@ -16,9 +16,9 @@
   },
   "scripts": {
     "start": "ts-node ./src/index.ts",
+    "prepare": "npm run build",
     "watch": "nodemon",
     "build": "tsc",
-    "prepublish": "npm run build",
     "test": "jest",
     "west": "jest --watch",
     "check-starters": "npx ts-node starters/tools/checkStarters.ts",
