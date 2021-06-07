@@ -1,7 +1,7 @@
 {
   "name": "startmeup",
-  "version": "1.0.0",
-  "description": "Quickly download any github repo folder to jumpstart coding",
+  "version": "0.1.0",
+  "description": "Jumpstart coding by downloading any git repo (sub)folder",
   "main": "bin/index.js",
   "types": "bin/index.d.ts",
   "repository": "git@github.com:aGuyNamedJonas/startmeup.git",
@@ -22,7 +22,8 @@
     "test": "jest",
     "west": "jest --watch",
     "check-starters": "npx ts-node starters/tools/checkStarters.ts",
-    "ensure-only-starters-changed": "npx ts-node starters/tools/ensureOnlyStartersChanged.ts"
+    "ensure-only-starters-changed": "npx ts-node starters/tools/ensureOnlyStartersChanged.ts",
+    "add-starters-to-readme": "npx ts-node starters/tools/addStartersToReadme.ts"
   },
   "dependencies": {
     "@types/glob": "^7.1.3",
