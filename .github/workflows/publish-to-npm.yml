@@ -20,7 +20,7 @@ jobs:
       - run: git add README.md
       - run: git commit -m 'Update starters in README.md'
       - run: rm -r ./bin -f
-      - run: npm prepare
+      - run: npm run prepare
       - run: npm version patch
       - uses: JS-DevTools/npm-publish@v1
         with:
