@@ -34,6 +34,6 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
       - name: Push new README & package version change back to repo
         run: |
-          git add README.md
-          git commit -m 'Update starters in README.md'
+          git add README.md package.json
+          git commit -m 'Upgrade version + update README'
           git push origin HEAD:main
