@@ -25,13 +25,12 @@ jobs:
           npm run add-starters-to-readme
       - name: Build new package version
         run: |
-          env
           rm -r ./bin -f
           npm run prepare
           npm version patch --no-git-tag-version
           npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push new README & package version change back to repo
         run: |
           git add README.md
