@@ -25,6 +25,7 @@ jobs:
           npm run add-starters-to-readme
       - name: Build new package version
         run: |
+          env
           rm -r ./bin -f
           npm run prepare
           npm version patch --no-git-tag-version
