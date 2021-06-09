@@ -23,16 +23,14 @@ jobs:
       - name: Add starters to README
         run: |
           npm run add-starters-to-readme
-      - name: Push new README back to repo
-        run: |
-          git add README.md
-          git commit -m 'Update starters in README.md'
-          git push origin HEAD:main
-      - name: Build & publish startmeup
+      - name: Build new package version
         run: |
           rm -r ./bin -f
           npm run prepare
           npm version patch
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+          npm publish --access public
+      - name: Push new README & package version change back to repo
+        run: |
+          git add README.md
+          git commit -m 'Update starters in README.md'
+          git push origin HEAD:main
