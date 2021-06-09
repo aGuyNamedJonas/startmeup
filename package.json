@@ -1,6 +1,6 @@
 {
   "name": "startmeup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Jumpstart coding by downloading any git repo (sub)folder",
   "main": "bin/index.js",
   "types": "bin/index.d.ts",
