@@ -1,0 +1,6 @@
+{
+  "bundleUrl": "https://raw.githubusercontent.com/aGuyNamedJonas/ts-npm-starter/main/startmeup.bundle.zip",
+  "repo": "https://github.com/aGuyNamedJonas/ts-npm-starter",
+  "description": "Self-publishing Typescript NPM package starter",
+  "category": "NPM"
+}
