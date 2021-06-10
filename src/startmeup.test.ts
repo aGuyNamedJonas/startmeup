@@ -14,12 +14,12 @@ describe('startmeup', () => {
 
       const tempDirCreator = jest.fn().mockReturnValue('/tmp/dir')
       const fetcher = jest.fn().mockResolvedValue({ 'starter-name': { 'description': 'My awesome starter' } })
-      const fileReader = jest.fn().mockReturnValue({
+      const fileReader = jest.fn().mockReturnValue(`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      })
+      }`)
       const unzip = jest.fn().mockResolvedValue(true)
       const fileDestroyer = jest.fn().mockResolvedValue(true)
 
@@ -203,12 +203,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
       
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
       expect(tempDirCreator).toHaveBeenCalled()
@@ -251,12 +251,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
       
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
       expect(fileReader).toHaveBeenCalledWith('/tmp/dir/starter-config.json')
@@ -276,12 +276,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
       
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
       expect(fetcher).toHaveBeenCalledWith('https://url.com/to/the/startmeup.bundle.zip', '/tmp/dir')
@@ -307,12 +307,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
       
       try {
         await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
@@ -335,12 +335,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
 
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
       expect(unzip).toHaveBeenCalledWith('/tmp/dir/startmeup.bundle.zip', '/some/local/folder')      
@@ -360,12 +360,12 @@ describe('startmeup', () => {
       const fileCopier = jest.fn()
       const fileDestroyer = jest.fn()
       const unzip = jest.fn().mockResolvedValue(true)
-      const fileReader = jest.fn(() => ({
+      const fileReader = jest.fn(() => (`{
         "bundleUrl": "https://url.com/to/the/startmeup.bundle.zip",
         "repo": "https://github.com/user/repo",
         "description": "description",
         "category": "category"
-      }))
+      }`))
 
       await startmeup({ argsv, argsParser, fetcher, git, tempDirCreator, fileCopier, fileDestroyer, unzip, fileReader } as unknown as StartmeupProps)
       expect(fileDestroyer).toHaveBeenCalledWith('/tmp/dir')      
