@@ -45,7 +45,7 @@ export function fetcher(url: string, destinationFolder: string): Promise<void> {
 }
 
 export function fileDestroyer (targetFile: string){
-  fs.rmdirSync(targetFile, { recursive: true })
+  fs.rmSync(targetFile, { recursive: true })
 }
 
 export function fileReader (targetFile: string) {
