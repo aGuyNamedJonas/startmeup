@@ -107,7 +107,7 @@ async function runStarterVariant (props: StartmeupProps, args: StarterArgs) {
     throw new Error(`Could not find ${args.starterJsonUrl}`)
   }
 
-  const { bundleUrl, repo, description, category } = fileReader(path.join(tempDir, path.basename(args.starterJsonUrl))) as unknown as StarterJsonConfig
+  const { bundleUrl, repo, description, category } = JSON.parse(fileReader(path.join(tempDir, path.basename(args.starterJsonUrl)))) as unknown as StarterJsonConfig
   try {
     await fetcher(bundleUrl, tempDir)
   } catch (error) {
