@@ -44,13 +44,20 @@ export type StarterArgs = {
 function parseGitArgs (argsv: string[]): GitArgs {
   const [npx, startmeup, repo, repoFolderParam, localFolderParam] = argsv
 
+  const customBranchMatcher = /:(\w+)$/g
+  const customBranch = customBranchMatcher.exec(repo)
+  const branch = customBranch ? customBranch[1] : 'main'
+
+  const [provider, userName, repoNameWithOptionalBranch] = repo.split('/')
+  const repoName = repoNameWithOptionalBranch.split(':')[0]
+
   let gitUrl = ''
   if (
       repo.startsWith('github.com') ||
       repo.startsWith('gitlab.com') ||
       repo.startsWith('bitbucket.org')
     ) {
-    gitUrl = `https://${repo}.git`
+    gitUrl = `https://${provider}/${userName}/${repoName}.git`
   } else if (
     repo.startsWith('https://') &&
     (repo.endsWith('.git') || repo.endsWith('startmeup.bundle.zip'))
@@ -60,14 +67,8 @@ function parseGitArgs (argsv: string[]): GitArgs {
     throw new Error('repo invalid')
   }
 
-  const customBranchMatcher = /:(\w+)$/g
-  const customBranch = customBranchMatcher.exec(repo)
-  const branch = customBranch ? customBranch[1] : 'main'
-
   // Guess startmeup.bundle.zip file location
   let possibleBundleUrl = ''
-  const [provider, userName, repoNameWithOptionalBranch] = repo.split('/')
-  const repoName = repoNameWithOptionalBranch.split(':')[0]
 
   if (repo.startsWith('https://') && repo.endsWith('startmeup.bundle.zip')) {
     possibleBundleUrl = repo
