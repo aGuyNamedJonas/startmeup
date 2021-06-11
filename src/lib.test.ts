@@ -11,6 +11,11 @@ describe('argsParser', () => {
       const args = argsParser(['npx', 'startmeup', 'github.com/user/repo']) as GitArgs
       expect(args.gitUrl).toBe('https://github.com/user/repo.git')
     })
+
+    test('Bugfix: Returns correct git URL for github when branch is specified', () => {
+      const args = argsParser(['npx', 'startmeup', 'github.com/user/repo:branch']) as GitArgs
+      expect(args.gitUrl).toBe('https://github.com/user/repo.git')
+    })
   
     test('Returns correct git URL for gitlab', () => {
       const args = argsParser(['npx', 'startmeup', 'gitlab.com/user/repo']) as GitArgs

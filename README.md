@@ -1,8 +1,6 @@
 # startmeup ![$ npx startmeup supported](https://img.shields.io/static/v1?label=$npx%20startmeup%20&color=CB3837&logo=npm&message=<starter>)
 > Jumpstart coding by downloading any git repo (sub)folder
 
-> **Still working on a few things:** In case you already stumble upon this on NPM, I'm currently adding more console output & preparing a few last things for you to contribute your starters - it already works though (04. June 2021)
-
 `$ npx startmeup repo[:branch] [repoSubfolder] [localFolder]` (see [Usage](#usage))  
 
 `$ npx startmeup starter [localFolder]` (see [Starters](#starters))
@@ -16,17 +14,6 @@
 # Starters
 > Just run `$ npx startmeup <starter>` ([Add your own starters](#add-your-own-starters))
 
-
-
-
-
-
-
-
-
-
-
-
 <!---STARTER_LIST_START-->
 #### **CDK**
 * [cdk-stack-starter](https://github.com/aGuyNamedJonas/cdk-stack-starter) - Sensible, minimalistic CDK Stack Starter (TS)  
@@ -35,17 +22,6 @@
 #### **Typescript**
 * [ts-starter](https://github.com/aGuyNamedJonas/ts-starter) - Typescript starter with nodemon & jest  
 <!---STARTER_LIST_END-->
-
-
-
-
-
-
-
-
-
-
-
 
 # Usage
 ## 1. The universal way
